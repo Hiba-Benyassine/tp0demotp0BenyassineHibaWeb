@@ -8,7 +8,6 @@ import jakarta.inject.Named;
 import ma.emsi.benyassine.tp0.service.GenerateurReponse;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,9 +20,10 @@ public class Bb implements Serializable {
     private GenerateurReponse generateurReponse;
 
     private String question;
+    private String reponse = "";
     private String role;
     private boolean roleSystemeAffiche;
-    private List<Echange> historique = new ArrayList<>();
+    private StringBuilder historique = new StringBuilder();
     private final List<String> roles = Arrays.asList("Assistant", "Traducteur français-anglais", "Guide touristique");
 
     public void envoyer() {
@@ -36,45 +36,36 @@ public class Bb implements Serializable {
             contexte.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Rôle manquant", "Veuillez renseigner le rôle de l’assistant."));
             return;
         }
-        String reponse = generateurReponse.generer(question, role);
-        historique.add(new Echange(question.trim(), role, reponse));
+        reponse = generateurReponse.generer(question, role);
+        historique.append("Vous : ").append(question.trim()).append(System.lineSeparator())
+                .append("Réponse : ").append(reponse).append(System.lineSeparator()).append(System.lineSeparator());
         question = "";
         this.roleSystemeAffiche = true;
     }
 
     public void nouveauChat() {
-        historique.clear();
+        historique.setLength(0);
         question = "";
+        reponse = "";
         role = null;
         roleSystemeAffiche = false;
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Nouveau chat", "La conversation a été réinitialisée."));
     }
 
     public void effacerHistorique() {
-        historique.clear();
+        historique.setLength(0);
     }
 
     public String getQuestion() { return question; }
     public void setQuestion(String question) { this.question = question; }
+    public String getReponse() { return reponse; }
+    public void setReponse(String reponse) { this.reponse = reponse; }
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
     public boolean isRoleSystemeAffiche() { return roleSystemeAffiche; }
-    public List<Echange> getHistorique() { return historique; }
-    public List<String> getRoles() { return roles; }
-
-    public static class Echange implements Serializable {
-        private static final long serialVersionUID = 1L;
-        private final String question;
-        private final String role;
-        private final String reponse;
-
-        public Echange(String question, String role, String reponse) {
-            this.question = question;
-            this.role = role;
-            this.reponse = reponse;
-        }
-        public String getQuestion() { return question; }
-        public String getRole() { return role; }
-        public String getReponse() { return reponse; }
+    public String getHistorique() { return historique.toString(); }
+    public void setHistorique(String historique) {
+        this.historique = new StringBuilder(historique == null ? "" : historique);
     }
+    public List<String> getRoles() { return roles; }
 }
