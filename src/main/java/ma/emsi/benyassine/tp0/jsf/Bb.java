@@ -1,6 +1,5 @@
 package ma.emsi.benyassine.tp0.jsf;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
@@ -10,7 +9,6 @@ import ma.emsi.benyassine.tp0.service.GenerateurReponse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Named("bb")
@@ -25,12 +23,7 @@ public class Bb implements Serializable {
     private String role;
     private boolean roleSystemeAffiche;
     private List<Echange> historique = new ArrayList<>();
-    private final List<String> roles = Arrays.asList("Professeur", "Conseiller", "Assistant rédactionnel", "Développeur");
-
-    @PostConstruct
-    public void initialiser() {
-        // CDI injecte le générateur avant l’utilisation du bean.
-    }
+    private final List<String> roles = List.of("Assistant", "Traducteur français-anglais", "Guide touristique");
 
     public void envoyer() {
         FacesContext contexte = FacesContext.getCurrentInstance();

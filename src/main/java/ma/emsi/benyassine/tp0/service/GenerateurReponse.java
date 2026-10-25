@@ -1,8 +1,8 @@
 package ma.emsi.benyassine.tp0.service;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.Dependent;
 
-@ApplicationScoped
+@Dependent
 public class GenerateurReponse {
     /** Traitement personnel : reformule la question en réponse miroir contextualisée. */
     public String generer(String question, String role) {

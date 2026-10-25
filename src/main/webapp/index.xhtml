@@ -24,7 +24,7 @@
             <p:messages id="messages" showDetail="true" closable="true" />
             <div class="role-row">
                 <h:outputLabel for="role" value="Rôle de l’assistant" />
-                <p:selectOneMenu id="role" value="#{bb.role}" styleClass="role-select">
+                <p:selectOneMenu id="role" value="#{bb.role}" disabled="#{bb.roleSystemeAffiche}" styleClass="role-select">
                     <f:selectItem itemLabel="Choisir un rôle…" itemValue="" noSelectionOption="true" />
                     <f:selectItems value="#{bb.roles}" />
                 </p:selectOneMenu>
