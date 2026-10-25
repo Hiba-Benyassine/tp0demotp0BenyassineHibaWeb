@@ -2,8 +2,12 @@ package ma.emsi.benyassine.tp0.service;
 
 import jakarta.enterprise.context.Dependent;
 
+import java.io.Serializable;
+
 @Dependent
-public class GenerateurReponse {
+public class GenerateurReponse implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     /** Traitement personnel : reformule la question en réponse miroir contextualisée. */
     public String generer(String question, String role) {
         String texte = question == null ? "" : question.trim().replaceAll("\\s+", " ");

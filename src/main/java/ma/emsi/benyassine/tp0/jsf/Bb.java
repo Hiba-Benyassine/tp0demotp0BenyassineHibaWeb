@@ -9,6 +9,7 @@ import ma.emsi.benyassine.tp0.service.GenerateurReponse;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Named("bb")
@@ -23,7 +24,7 @@ public class Bb implements Serializable {
     private String role;
     private boolean roleSystemeAffiche;
     private List<Echange> historique = new ArrayList<>();
-    private final List<String> roles = List.of("Assistant", "Traducteur français-anglais", "Guide touristique");
+    private final List<String> roles = Arrays.asList("Assistant", "Traducteur français-anglais", "Guide touristique");
 
     public void envoyer() {
         FacesContext contexte = FacesContext.getCurrentInstance();

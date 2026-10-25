@@ -110,7 +110,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Payara Server.Payara 7.2026.101.executor": "Run",
+    "Payara Server.tp0.executor": "Run",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -125,7 +125,7 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration name="Payara 7.2026.101" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 7.2026.101" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="tp0" type="PayaraServerConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="Payara 7.2026.101" ALTERNATIVE_JRE_ENABLED="false">
       <deployment>
         <artifact name="tp0demotp0BenyassineHibaWeb:war exploded">
           <settings />

@@ -13,15 +13,15 @@
     <main class="app-shell">
         <header class="topbar">
             <div class="brand"><span class="brand-mark">✦</span><div><strong>Assistant IA</strong><small>Votre espace de conversation</small></div></div>
-            <h:form><p:commandButton value="＋ Nouveau chat" action="#{bb.nouveauChat}" update="conversation messages question role" process="@this" styleClass="new-chat" /></h:form>
+            <h:form><p:commandButton value="＋ Nouveau chat" action="#{bb.nouveauChat}" update=":chatForm:conversation :chatForm:messages :chatForm:question :chatForm:role" process="@this" styleClass="new-chat" /></h:form>
         </header>
         <section class="welcome">
             <span class="eyebrow">CONVERSATION INTELLIGENTE</span>
-            <h1>Bonjour, comment puis-je vous aider&nbsp;?</h1>
+            <h1>Bonjour, comment puis-je vous aider&#160;?</h1>
             <p>Choisissez un rôle et posez votre question pour commencer.</p>
         </section>
         <h:form id="chatForm" styleClass="chat-form">
-            <p:messages id="messages" showDetail="true" closable="true" />
+            <h:messages id="messages" showDetail="true" styleClass="ui-messages" />
             <div class="role-row">
                 <h:outputLabel for="role" value="Rôle de l’assistant" />
                 <p:selectOneMenu id="role" value="#{bb.role}" disabled="#{bb.roleSystemeAffiche}" styleClass="role-select">
@@ -29,14 +29,16 @@
                     <f:selectItems value="#{bb.roles}" />
                 </p:selectOneMenu>
             </div>
-            <section id="conversation" class="conversation" aria-live="polite">
-                <ui:repeat xmlns:ui="jakarta.faces.facelets" value="#{bb.historique}" var="echange">
-                    <article class="exchange">
-                        <div class="bubble user-bubble"><span class="bubble-label">VOUS</span><p>#{echange.question}</p></div>
-                        <div class="bubble assistant-bubble"><span class="bubble-label">ASSISTANT · #{echange.role}</span><p>#{echange.reponse}</p></div>
-                    </article>
-                </ui:repeat>
-            </section>
+            <h:panelGroup id="conversation" layout="block">
+                <section class="conversation" aria-live="polite">
+                    <ui:repeat xmlns:ui="jakarta.faces.facelets" value="#{bb.historique}" var="echange">
+                        <article class="exchange">
+                            <div class="bubble user-bubble"><span class="bubble-label">VOUS</span><p>#{echange.question}</p></div>
+                            <div class="bubble assistant-bubble"><span class="bubble-label">ASSISTANT · #{echange.role}</span><p>#{echange.reponse}</p></div>
+                        </article>
+                    </ui:repeat>
+                </section>
+            </h:panelGroup>
             <div class="composer">
                 <p:inputTextarea id="question" value="#{bb.question}" rows="3" autoResize="false" maxlength="2000" placeholder="Écrivez votre question…" />
                 <div class="composer-footer"><span>Entrée pour envoyer · soyez précis</span><p:commandButton value="Envoyer  →" action="#{bb.envoyer}" update="conversation messages question role" process="@form" styleClass="send-button" /></div>
